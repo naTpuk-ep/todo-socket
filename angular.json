@@ -6,6 +6,12 @@
     "todo-socket": {
       "projectType": "application",
       "schematics": {
+        "@schematics/angular": {
+          "component": {
+            "changeDetection": "OnPush",
+            "standalone": true
+          }
+        },
         "@schematics/angular:component": {
           "style": "scss"
         }
@@ -32,6 +38,7 @@
               }
             ],
             "styles": [
+              "@angular/material/prebuilt-themes/magenta-violet.css",
               "src/styles.scss"
             ],
             "scripts": []
@@ -67,7 +74,8 @@
               "buildTarget": "todo-socket:build:production"
             },
             "development": {
-              "buildTarget": "todo-socket:build:development"
+              "buildTarget": "todo-socket:build:development",
+              "proxyConfig": "src/proxy.conf.json"
             }
           },
           "defaultConfiguration": "development"
@@ -91,6 +99,7 @@
               }
             ],
             "styles": [
+              "@angular/material/prebuilt-themes/magenta-violet.css",
               "src/styles.scss"
             ],
             "scripts": []
