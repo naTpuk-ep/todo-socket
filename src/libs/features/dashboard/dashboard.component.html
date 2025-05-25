@@ -1,1 +1,26 @@
-<p>{{ state.list()?.length }}</p>
+<div style="margin: 50px;">
+  <div>
+    <button mat-raised-button (click)="onOpenCreateDialog()">Create task</button>
+  </div>
+  <mat-divider style="margin-top: 2rem; margin-bottom: 2rem;"></mat-divider>
+  <div class="list-container">
+    <div class="column-container">
+      <h2>To do</h2>
+      <div
+        class="list">
+        @for (item of todoItems(); track item.id) {
+          <app-card class="todo-item" [item]="item"></app-card>
+        }
+      </div>
+    </div>
+    <div class="column-container">
+      <h2>Done</h2>
+      <div
+        class="list">
+        @for (item of doneItems(); track item.id) {
+          <app-card class="todo-item" [item]="item"Z></app-card>
+        }
+      </div>
+    </div>
+  </div>
+</div>

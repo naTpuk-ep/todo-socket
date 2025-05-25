@@ -1,0 +1,18 @@
+form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 16px 24px;
+  h3 {
+    text-align: center;
+  }
+
+  mat-form-field {
+    width: 100%;
+    min-width: 300px;
+  }
+
+  button {
+    width: 100%;
+  }
+}

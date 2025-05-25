@@ -1,0 +1,33 @@
+<form [formGroup]="form">
+
+  <h3>{{ title }}</h3>
+
+  <mat-form-field>
+    <mat-label>Title</mat-label>
+    <input id="title" matInput placeholder="Please enter a title" formControlName="title">
+    <mat-error *ngIf="form.controls.title.hasError('required')">Required</mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Text</mat-label>
+    <input id="text" matInput formControlName="text">
+    <mat-error *ngIf="form.controls.text.hasError('required')">Required</mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Complexity</mat-label>
+    <mat-select formControlName="complexity">
+      <mat-option *ngFor="let c of complexityValues" [value]="c">{{ c }}</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Status</mat-label>
+    <mat-select formControlName="status">
+      <mat-option *ngFor="let s of statusValues" [value]="s">{{ s }}</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <button (click)="save()" mat-button type="submit">Save</button>
+
+</form>

@@ -7,7 +7,6 @@ import observableSocket from '../utils/observable-socket';
 
 
 export enum TodoStatus {
-  BACKLOG = 'BACKLOG',
   TODO = 'TODO',
   DONE = 'DONE',
 }
@@ -18,7 +17,6 @@ export enum TodoComplexity {
 }
 export interface TodoAdd {
   title: string;
-  subTitle?: string;
   text: string;
   status: TodoStatus;
   complexity: TodoComplexity;

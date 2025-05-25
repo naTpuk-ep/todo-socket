@@ -3,7 +3,7 @@ html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 html {
-  color-scheme: light dark;
+  color-scheme: light purple;
   @include mat.theme((
     color: mat.$violet-palette,
     typography: Roboto,

@@ -1,4 +1,4 @@
-import { inject, Injectable } from '@angular/core';
+import { inject, Injectable, Signal } from '@angular/core';
 import { BehaviorSubject, switchMap, tap } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { toLazySignal } from 'ngxtension/to-lazy-signal';
@@ -55,7 +55,7 @@ export class DashboardState {
         tap(id => {
           const list = this.list$.value;
           list
-            && list.splice(list.findIndex(item => item.id === id))
+            && list.splice(list.findIndex(item => item.id === id), 1)
             && this.list$.next([...list]);
         }),
         takeUntilDestroyed()

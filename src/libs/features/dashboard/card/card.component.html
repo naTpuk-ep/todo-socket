@@ -1,0 +1,9 @@
+<mat-card class="item" [ngClass]="{
+  'easy': item().complexity === 'EASY',
+  'medium': item().complexity === 'MEDIUM',
+  'hard': item().complexity === 'HARD'
+}">
+  <mat-checkbox [formControl]="checkbox"></mat-checkbox>
+  <div (click)="edit()" class="text" [ngClass]="{'done': item().status === 'DONE'}">{{ item().title }}</div>
+  <button (click)="delete()" mat-icon-button>❌</button>
+</mat-card>
