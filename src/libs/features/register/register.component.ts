@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { MatCard, MatCardContent, MatCardHeader, MatCardTitle } from '@angular/material/card';
 import {
   FormBuilder,
@@ -8,8 +8,7 @@ import {
 } from '@angular/forms';
 import { MatError, MatFormField, MatInput } from '@angular/material/input';
 import { MatButton } from '@angular/material/button';
-import { UserApiService } from '../../api-services/user.api.service';
-import { tap } from 'rxjs';
+import { UserApiService } from '../../services/user.api.service';
 import { CommonModule } from '@angular/common';
 import { FormValidator } from '../../utils/form-validator';
 
@@ -32,6 +31,7 @@ import { FormValidator } from '../../utils/form-validator';
     MatButton,
     MatFormField,
     MatError,
+    RouterLink,
   ],
 })
 export class RegisterComponent {
@@ -55,7 +55,6 @@ export class RegisterComponent {
           username: this.form.value.username!,
           password: this.form.value.password!
         })
-        .pipe(tap(() => this.router.navigate(['login'])))
         .subscribe();
     }
   }

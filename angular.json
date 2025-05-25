@@ -8,8 +8,7 @@
       "schematics": {
         "@schematics/angular": {
           "component": {
-            "changeDetection": "OnPush",
-            "standalone": true
+            "changeDetection": "OnPush"
           }
         },
         "@schematics/angular:component": {
@@ -38,7 +37,6 @@
               }
             ],
             "styles": [
-              "@angular/material/prebuilt-themes/magenta-violet.css",
               "src/styles.scss"
             ],
             "scripts": []
@@ -75,7 +73,7 @@
             },
             "development": {
               "buildTarget": "todo-socket:build:development",
-              "proxyConfig": "src/proxy.conf.json"
+              "proxyConfig": "proxy.conf.json"
             }
           },
           "defaultConfiguration": "development"

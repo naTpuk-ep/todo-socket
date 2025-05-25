@@ -1,17 +1,16 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { MatCard, MatCardContent, MatCardHeader, MatCardTitle } from '@angular/material/card';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatError, MatFormField, MatInput } from '@angular/material/input';
 import { MatButton } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
-import { UserApiService } from '../../api-services/user.api.service';
-import { tap } from 'rxjs';
+import { UserApiService } from '../../services/user.api.service';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  // changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
   imports: [
@@ -25,6 +24,7 @@ import { tap } from 'rxjs';
     MatInput,
     MatCardHeader,
     MatError,
+    RouterLink,
   ],
 })
 export class LoginComponent {
@@ -37,12 +37,15 @@ export class LoginComponent {
     password: ['', [Validators.required]]
   });
 
+  readonly needLogin = !this.userService.checkLoggedInAndNavigate();
+
   login() {
     if (this.form.valid) {
       this.userService.login({
         email: this.form.value.email!,
         password: this.form.value.password!
-      }).subscribe();
+      })
+      .subscribe()
     }
   }
 

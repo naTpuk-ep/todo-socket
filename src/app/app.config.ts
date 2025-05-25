@@ -4,11 +4,7 @@ import { routes } from './app.routes';
 import { provideHttpClient } from '@angular/common/http';
 import { MAT_SNACK_BAR_DEFAULT_OPTIONS, MatSnackBarConfig } from '@angular/material/snack-bar';
 import { JwtModule } from '@auth0/angular-jwt';
-
-export const STORAGE_TOKEN_KEY = 'todo-socket';
-export function tokenGetter() {
-  return localStorage.getItem(STORAGE_TOKEN_KEY);
-}
+import { UserApiService } from '../libs/services/user.api.service';
 export const snackBarConfig: MatSnackBarConfig = {
   duration: 2500,
   horizontalPosition: 'right',
@@ -26,8 +22,8 @@ export const appConfig: ApplicationConfig = {
     },
     importProvidersFrom(JwtModule.forRoot({
       config: {
-        tokenGetter,
-        allowedDomains: ['localhost:3000']
+        tokenGetter: UserApiService.tokenGetter,
+        allowedDomains: ['localhost:3000'],
       }
     }))
   ]
