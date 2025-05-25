@@ -44,6 +44,7 @@ export class UserApiService {
   register(userRegister: UserRegister): Observable<UserDTO> {
     return this.http.post<UserDTO>('/api/users', userRegister).pipe(
       tap((createdUser: UserDTO) => this.snack.open(`User ${createdUser.username} was created`, 'Close')),
+      tap(() => this.router.navigate(['/login'])),
       catchError(e => {
         this.snack.open(e.error.message, 'Close');
         return throwError(e);

@@ -21,6 +21,9 @@
   }
 }
 
+header {
+  display: flex;
+}
 
 .cdk-drag-preview {
 box-sizing: border-box;
@@ -44,4 +47,8 @@ border: none;
 
 .list.cdk-drop-list-dragging .todo-item:not(.cdk-drag-placeholder) {
 transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.logout-btn {
+  margin-left: auto;
 }

@@ -43,7 +43,7 @@ export interface SocketError {
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class TodoSocketApiService {
   private readonly todosSocketApi = '/todos';
@@ -75,7 +75,7 @@ export class TodoSocketApiService {
   readonly onList = observableSocket<TodoDTO[]>(this.socket, 'todos');
   readonly onAdd = observableSocket<TodoDTO>(this.socket, 'addedTodo');
   readonly onUpdate = observableSocket<TodoDTO>(this.socket, 'updatedTodo')
-  readonly onDelete = observableSocket<number>(this.socket, 'deletedTodo');
+  readonly onDelete = observableSocket<number>(this.socket, 'deletedTodo')
 
   add(todoItem: TodoAdd) {
     this.socket.emit('addTodo', todoItem);
@@ -87,5 +87,12 @@ export class TodoSocketApiService {
 
   delete(id: number) {
     this.socket.emit('deleteTodo', id);
+  }
+
+  connect() {
+    this.socket.connect();
+  }
+  disconnect() {
+    this.socket.disconnect();
   }
 }

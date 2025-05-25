@@ -1,4 +1,4 @@
-import { inject, Injectable, Signal } from '@angular/core';
+import { inject, Injectable, OnDestroy } from '@angular/core';
 import { BehaviorSubject, switchMap, tap } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { toLazySignal } from 'ngxtension/to-lazy-signal';
@@ -11,7 +11,7 @@ import {
 
 
 @Injectable()
-export class DashboardState {
+export class DashboardState implements OnDestroy {
   private readonly apiService = inject(TodoSocketApiService);
   private readonly list$ = new BehaviorSubject<TodoDTO[] | null>(null);
 
@@ -21,9 +21,17 @@ export class DashboardState {
         tap(list => {
           this.list$.next(list);
         }),
-        switchMap(_ => this.list$)
+        switchMap(_ => this.list$),
       )
-  )
+  );
+
+  constructor() {
+    this.apiService.connect();
+  }
+
+  ngOnDestroy() {
+    this.apiService.disconnect();
+  }
 
   private readonly onAdd =
     this.apiService.onAdd

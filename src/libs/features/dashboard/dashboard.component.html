@@ -1,7 +1,8 @@
 <div style="margin: 50px;">
-  <div>
+  <header>
     <button mat-raised-button (click)="onOpenCreateDialog()">Create task</button>
-  </div>
+    <button class="logout-btn" mat-button (click)="user.logOut()">Log out</button>
+  </header>
   <mat-divider style="margin-top: 2rem; margin-bottom: 2rem;"></mat-divider>
   <div class="list-container">
     <div class="column-container">
@@ -18,7 +19,7 @@
       <div
         class="list">
         @for (item of doneItems(); track item.id) {
-          <app-card class="todo-item" [item]="item"Z></app-card>
+          <app-card class="todo-item" [item]="item"></app-card>
         }
       </div>
     </div>

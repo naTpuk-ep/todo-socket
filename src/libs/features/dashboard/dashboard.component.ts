@@ -1,4 +1,10 @@
-import { ChangeDetectionStrategy, Component, computed, inject, Injector } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  inject,
+  Injector,
+} from '@angular/core';
 import { DashboardState } from './dashboard.state';
 import { CreateTodoDialogComponent } from './create-todo-dialog/create-todo-dialog.component';
 import { MatButton } from '@angular/material/button';
@@ -6,6 +12,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { TodoStatus } from '../../services/todo-socket.api.service';
 import { CardComponent } from './card/card.component';
 import { MatDivider } from '@angular/material/divider';
+import { UserApiService } from '../../services/user.api.service';
 
 
 @Component({
@@ -24,6 +31,7 @@ import { MatDivider } from '@angular/material/divider';
 export class DashboardComponent {
 
   readonly state = inject(DashboardState);
+  readonly user = inject(UserApiService);
   private readonly dialog = inject(MatDialog);
   private readonly injector = inject(Injector);
 
@@ -33,8 +41,6 @@ export class DashboardComponent {
   readonly doneItems = computed(() =>
     this.state.list()?.filter(item => item.status === TodoStatus.DONE).sort((a, b) => a.id - b.id)
   );
-
-
 
   onOpenCreateDialog() {
     this.dialog.open(CreateTodoDialogComponent, {
