@@ -28,9 +28,7 @@ import { UserApiService } from '../../services/user.api.service';
   ],
 })
 export class LoginComponent {
-
   private readonly userService = inject(UserApiService);
-  private readonly router = inject(Router);
 
   readonly form = inject(FormBuilder).group({
     email: ['', [Validators.required, Validators.email]],

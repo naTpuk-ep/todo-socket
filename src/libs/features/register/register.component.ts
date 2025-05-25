@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { Router, RouterLink } from '@angular/router';
+import { RouterLink } from '@angular/router';
 import { MatCard, MatCardContent, MatCardHeader, MatCardTitle } from '@angular/material/card';
 import {
   FormBuilder,
@@ -45,7 +45,6 @@ export class RegisterComponent {
   )
 
   private readonly userService = inject(UserApiService);
-  private readonly router = inject(Router);
 
   register() {
     if(this.form.valid) {
