@@ -80,15 +80,12 @@ export class TodoSocketApiService {
   add(todoItem: TodoAdd) {
     this.socket.emit('addTodo', todoItem);
   }
-
   update(updatedItem: TodoUpdate) {
     this.socket.emit('updateTodo', updatedItem);
   }
-
   delete(id: number) {
     this.socket.emit('deleteTodo', id);
   }
-
   connect() {
     this.socket.connect();
   }

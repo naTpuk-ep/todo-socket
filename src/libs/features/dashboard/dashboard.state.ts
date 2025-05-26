@@ -25,14 +25,6 @@ export class DashboardState implements OnDestroy {
       )
   );
 
-  constructor() {
-    this.apiService.connect();
-  }
-
-  ngOnDestroy() {
-    this.apiService.disconnect();
-  }
-
   private readonly onAdd =
     this.apiService.onAdd
       .pipe(
@@ -68,7 +60,16 @@ export class DashboardState implements OnDestroy {
         }),
         takeUntilDestroyed()
       )
-      .subscribe()
+      .subscribe();
+
+
+  constructor() {
+    this.apiService.connect();
+  }
+
+  ngOnDestroy() {
+    this.apiService.disconnect();
+  }
 
   add(todo: TodoAdd) {
     this.apiService.add(todo);
