@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { Router, RouterLink } from '@angular/router';
+import { RouterLink } from '@angular/router';
 import { MatCard, MatCardContent, MatCardHeader, MatCardTitle } from '@angular/material/card';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatError, MatFormField, MatInput } from '@angular/material/input';
@@ -30,18 +30,15 @@ import { UserApiService } from '../../services/user.api.service';
 export class LoginComponent {
   private readonly userService = inject(UserApiService);
 
-  readonly form = inject(FormBuilder).group({
+  readonly form = inject(FormBuilder).nonNullable.group({
     email: ['', [Validators.required, Validators.email]],
     password: ['', [Validators.required]]
   });
 
-  readonly needLogin = !this.userService.checkLoggedInAndNavigate();
-
   login() {
     if (this.form.valid) {
       this.userService.login({
-        email: this.form.value.email!,
-        password: this.form.value.password!
+        ...this.form.getRawValue()
       })
       .subscribe()
     }

@@ -6,7 +6,6 @@ import {
 } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import {
-  TodoAdd,
   TodoComplexity,
   TodoStatus,
 } from '../../../services/todo-socket.api.service';
@@ -40,15 +39,15 @@ export class CreateTodoDialogComponent implements OnInit {
   readonly complexityValues = <TodoComplexity[]>Object.values(TodoComplexity)
   readonly statusValues = <TodoStatus[]>Object.values(TodoStatus);
 
-  readonly form= new FormBuilder().group({
+  readonly form= inject(FormBuilder).nonNullable.group({
     title: ['', Validators.required],
     text: '',
-    complexity: [TodoComplexity.MEDIUM, Validators.required],
-    status: [TodoStatus.TODO, Validators.required],
+    complexity: [<TodoComplexity>TodoComplexity.MEDIUM, Validators.required],
+    status: [<TodoStatus>TodoStatus.TODO, Validators.required],
   })
 
-  private readonly item = inject(MAT_DIALOG_DATA);
   private readonly dialogRef = inject(MatDialogRef<CreateTodoDialogComponent>);
+  private readonly item = inject(MAT_DIALOG_DATA);
   readonly title = this.item ? 'Edit task' : 'Create task';
 
   ngOnInit() {
@@ -57,7 +56,7 @@ export class CreateTodoDialogComponent implements OnInit {
 
   save() {
     if (this.form.valid) {
-      const value = this.form.value as TodoAdd;
+      const value = { ...this.form.getRawValue() };
       if (this.item) {
         this.state.update({
           id: this.item.id,

@@ -41,6 +41,10 @@ export class UserApiService {
     return localStorage.getItem(UserApiService.STORAGE_TOKEN_KEY);
   }
 
+  constructor() {
+    this.checkLoggedInAndNavigate();
+  }
+
   register(userRegister: UserRegister): Observable<UserDTO> {
     return this.http.post<UserDTO>('/api/users', userRegister).pipe(
       tap((createdUser: UserDTO) => this.snack.open(`User ${createdUser.username} was created`, 'Close')),
@@ -72,10 +76,10 @@ export class UserApiService {
   }
 
 
-  checkLoggedInAndNavigate(): boolean {
+  private checkLoggedInAndNavigate(): boolean {
     if (UserApiService.tokenGetter()) {
       this.router.navigate(['/dashboard']);
-      return true
+      return true;
     }
     return false;
   }

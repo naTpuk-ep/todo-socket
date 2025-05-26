@@ -35,8 +35,8 @@ import { FormValidator } from '../../utils/form-validator';
   ],
 })
 export class RegisterComponent {
-  readonly form = inject(FormBuilder).group({
-    email: ['', [Validators.required, Validators.email]],
+  readonly form = inject(FormBuilder).nonNullable.group({
+    email: [''],
     username: ['', [Validators.required]],
     password: ['', [Validators.required]],
     passwordConfirm: ['', [Validators.required]]
@@ -48,11 +48,12 @@ export class RegisterComponent {
 
   register() {
     if(this.form.valid) {
+      const { email, username, password } = this.form.getRawValue();
       this.userService
         .register({
-          email: this.form.value.email!,
-          username: this.form.value.username!,
-          password: this.form.value.password!
+          email,
+          username,
+          password
         })
         .subscribe();
     }

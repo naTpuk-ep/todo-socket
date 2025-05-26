@@ -50,7 +50,6 @@ export class CardComponent implements OnInit {
   delete() {
     this.state.delete(this.item().id);
   }
-
   edit() {
     this.dialog.open(CreateTodoDialogComponent, {
       data: this.item(),
