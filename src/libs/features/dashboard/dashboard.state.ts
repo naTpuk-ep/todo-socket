@@ -41,9 +41,10 @@ export class DashboardState implements OnDestroy {
       .pipe(
         tap(item => {
           const list = this.list$.value;
-          list
-            && (list[list.findIndex(listItem => item.id === listItem.id)] = item)
-            && this.list$.next([...list]);
+          if (list) {
+            list[list.findIndex(listItem => item.id === listItem.id)] = item;
+            this.list$.next([...list]);
+          }
         }),
         takeUntilDestroyed()
       )
@@ -54,9 +55,13 @@ export class DashboardState implements OnDestroy {
       .pipe(
         tap(id => {
           const list = this.list$.value;
-          list
-            && list.splice(list.findIndex(item => item.id === id), 1)
-            && this.list$.next([...list]);
+          if (list) {
+            const index = list.findIndex(item => item.id === id);
+            if (index >= 0) {
+              list.splice(index, 1);
+              this.list$.next([...list]);
+            }
+          }
         }),
         takeUntilDestroyed()
       )
