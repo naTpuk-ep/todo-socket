@@ -50,7 +50,7 @@ export class UserApiService {
       tap((createdUser: UserDTO) => this.snack.open(`User ${createdUser.username} was created`, 'Close')),
       tap(() => this.router.navigate(['/login'])),
       catchError(e => {
-        this.snack.open(e.error.message, 'Close');
+        this.snack.open(e?.error?.message || e?.message, 'Close');
         return throwError(e);
       })
     )
@@ -69,7 +69,7 @@ export class UserApiService {
           this.router.navigate(['/dashboard']);
         }),
         catchError(e => {
-          this.snack.open(`${e.error.message}`, 'Close');
+          this.snack.open(e?.error?.message || e?.message, 'Close');
           return throwError(e);
         })
       )

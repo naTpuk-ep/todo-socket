@@ -60,7 +60,7 @@ export class TodoSocketApiService {
   private readonly  messageOnError = this.onError
     .pipe(
       tap(e => {
-        this.snack.open(`${e.message}`, 'Close');
+        this.snack.open(`${e?.message}`, 'Close');
       })
     )
     .subscribe();
